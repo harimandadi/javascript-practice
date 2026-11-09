@@ -14,9 +14,10 @@
  */
 
 function findMatchesBuiltIn(arr1, arr2) {
-    // Step 1: Use .filter() to keep elements only if they match the value at the same index in arr2
-    // Note: It safely loops up to the length of arr1.
-    return arr1.filter((value, index) => value === arr2[index]);
+    // Go through arr1 and keep each value that equals the value at the same position in arr2.
+    return arr1.filter((value, index) => {
+        return value === arr2[index];
+    });
 }
 
 // --- TEST IN VSCODE ---
