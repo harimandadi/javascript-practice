@@ -25,7 +25,7 @@ function maxAdjacentDifference(arr) {
     // Step 3: Loop through the array starting from index 1 up to the end
     for (let i = 1; i < arr.length; i++) {
         
-        // Calculate the absolute difference between the current element and the previous element
+        // Calculate the absolute (abs) difference between the current element and the previous element
         // Math.abs() ensures the difference is always positive (e.g., |1 - 9| becomes 8, not -8)
         let currentDiff = Math.abs(arr[i] - arr[i - 1]);
 

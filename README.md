@@ -2,7 +2,7 @@
 
 JavaScript programs and study material for coding interviews: **arrays, numbers and strings**, plus self-checking cheat sheets, exercises and interview-program guides.
 
-- **55 programs** in `Arrays/`, `Numbers/` and `Strings/`
+- **82 programs** in `Arrays/`, `Numbers/` and `Strings/`
 - **Study material** in [`practice/`](practice/): cheat sheets, exercises with solutions, 36 interview programs and 32 string programs, with a [guide](practice/README.md) (also as [PDF](practice/README.pdf) and [Word](practice/README.docx))
 
 Only **Node.js** is needed. There is nothing to install.
@@ -25,7 +25,21 @@ Only **Node.js** is needed. There is nothing to install.
 
 ```
 javascript-practice/
-├── Arrays/      27 array programs (searching, sorting, two sum, max subarray, ...)
+├── Arrays/      54 array programs, grouped by PATTERN (see Arrays/README.md)
+│   ├── 01_Single_Pass/          min/max, stocks, majority (n/2 and n/3), missing number, leaders, ...
+│   ├── 02_HashMap_Set/          two sum, duplicates, frequency, longest consecutive, top k, intersection
+│   ├── 03_Two_Pointers/         three sum, move zeros, rotate, container, merge sorted, sort colors, rain water,
+│   │                            find duplicate (fast/slow), next permutation
+│   ├── 04_Kadane_Running_Sum/   max subarray sum, max product subarray
+│   ├── 05_Searching/            linear, binary, insert position, rotated search, rotated min, first & last
+│   ├── 06_Sorting/              bubble, selection, quick, merge, kth largest (quickselect)
+│   ├── 07_Compare_By_Index/     two inputs, same position (equality, Hamming, matching)
+│   ├── 08_Bit_Manipulation/     Hamming distance on bits
+│   ├── 09_Prefix_Sum/           product except self, subarray sum equals k
+│   ├── 10_Intervals/            merge intervals
+│   ├── 11_Sliding_Window/       max sum of size k (fixed), min size subarray sum (variable)
+│   ├── 12_Matrix/               spiral order, rotate image 90°, set matrix zeroes
+│   └── 13_Greedy/               jump game
 ├── Numbers/      9 number programs (factorial, Fibonacci, prime, Armstrong, ...)
 ├── Strings/     18 string programs + Index.js (programs grouped by technique)
 └── practice/    Cheat sheets, exercises, solutions and interview-program guides
@@ -39,7 +53,7 @@ javascript-practice/
 Run any file with `node`, from the repository folder:
 
 ```bash
-node Arrays/1_TwoSum_Indices.js
+node Arrays/02_HashMap_Set/1_TwoSum_Indices.js
 ```
 
 Example output:
@@ -56,35 +70,152 @@ The files in `practice/` check their own answers. For example `node practice/str
 
 ## Arrays
 
-| # | Program | Topic |
-|---|---|---|
-| 1 | [Two Sum (indices)](Arrays/1_TwoSum_Indices.js) | Hash map |
-| 2 | [Three Sum = 0](Arrays/2_ThreeSum_0.js) | Sorting + two pointers |
-| 3 | [Second largest value](Arrays/3_secondLargestValue.js) | Single pass |
-| 4 | [Min & max in an array](Arrays/4_min%26MaxInArray.js) | Single pass |
-| 5 | [Reverse / rotate an array by k](Arrays/5_reverseArrayByK.js) | Rotation |
-| 6 | [Move zeros to the end](Arrays/6_MoveZerosToEnd.js) | Two pointers |
-| 7 | [Best time to buy and sell stock](Arrays/7_BestTimeToBuyStocks.js) | Track the minimum |
-| 8 | [Kth missing positive number](Arrays/8_Missing_Positibve_Kth_Number.js) | Counting |
-| 9 | [Remove duplicates (unsorted)](Arrays/9_removeDuplicates_UnSortedArray.js) | Set / hash map |
-| 10 | [Remove duplicates (sorted)](Arrays/10_removeDuplicates_Sorted.js) | Two pointers |
-| 11 | [Majority element](Arrays/11_MajorityElement.js) | Counting / voting |
-| 12 | [Element frequency](Arrays/12_ElementFrequency.js) | Hash map |
-| 13 | [Equality of two arrays](Arrays/13_equalityOf_2Arays.js) | Comparison |
-| 14 | [Sum of elements](Arrays/14_Sum_Of_ElementsInArray.js) | Reduce / loop |
-| 15 | [Search insert position](Arrays/15_search_InsertPosition.js) | Binary search |
-| 16 | [Max difference between adjacent values](Arrays/16_maxDiffBWAdjacentValues_Array.js) | Single pass |
-| 17 | [Hamming distance](Arrays/17_hammingDistance.js) | Comparison |
-| 18 | [Hamming distance (bits)](Arrays/18_Hammingdistance_Bits.js) | Bit manipulation |
-| 19 | [Maximum subarray sum](Arrays/19_Maximu_Sub_Array_Sum.js) | Kadane's algorithm |
-| 20 | [Largest subarray (return the subarray)](Arrays/20_LargestSubarray_returnArray.js) | Kadane's algorithm |
-| 21 | [Find duplicate elements](Arrays/21_findDuplictate_Elements_InArray.js) | Set / hash map |
-| 22 | [Binary search](Arrays/22_Searching_BinarySearch.js) | Searching |
-| 22 | [Linear search](Arrays/22_Searching_LinearSearch.js) | Searching |
-| 24 | [Bubble sort](Arrays/24_BubbleSort.js) | Sorting |
-| 25 | [Selection sort](Arrays/25_SelectionSort.js) | Sorting |
-| 26 | [Quick sort](Arrays/26_QuickSort.js) | Sorting (divide & conquer) |
-| 27 | [Matching indices](Arrays/27_MatchingIndices.js) | Comparison |
+Grouped by **pattern**: learn the pattern, and every program in its folder becomes a variation of it. See [Arrays/README.md](Arrays/README.md) for each pattern's clue words and template.
+
+### 01 Single pass: track the best
+
+Clue words: "max / min / largest / count / sum" · Folder: [`Arrays/01_Single_Pass/`](Arrays/01_Single_Pass/)
+
+| # | Program |
+|---|---|
+| 1 | [Second largest value](Arrays/01_Single_Pass/1_secondLargestValue.js) |
+| 2 | [Min & max in an array](Arrays/01_Single_Pass/2_min%26MaxInArray.js) |
+| 3 | [Best time to buy and sell stock](Arrays/01_Single_Pass/3_BestTimeToBuyStocks.js) |
+| 4 | [Kth missing positive number](Arrays/01_Single_Pass/4_Missing_Positibve_Kth_Number.js) |
+| 5 | [Majority element (voting)](Arrays/01_Single_Pass/5_MajorityElement.js) |
+| 6 | [Sum of elements](Arrays/01_Single_Pass/6_Sum_Of_ElementsInArray.js) |
+| 7 | [Max difference between adjacent values](Arrays/01_Single_Pass/7_maxDiffBWAdjacentValues_Array.js) |
+| 8 | [Missing number (0 to n): sum formula and XOR](Arrays/01_Single_Pass/8_MissingNumber.js) |
+| 9 | [Leaders in an array](Arrays/01_Single_Pass/9_LeadersInAnArray.js) |
+| 10 | [Majority element II (more than n/3)](Arrays/01_Single_Pass/10_MajorityElementII.js) |
+
+### 02 Hash map / Set: remember what you've seen
+
+Clue words: "duplicate / frequency / pair / unique" · Folder: [`Arrays/02_HashMap_Set/`](Arrays/02_HashMap_Set/)
+
+| # | Program |
+|---|---|
+| 1 | [Two Sum (indices)](Arrays/02_HashMap_Set/1_TwoSum_Indices.js) |
+| 2 | [Remove duplicates (unsorted)](Arrays/02_HashMap_Set/2_removeDuplicates_UnSortedArray.js) |
+| 3 | [Element frequency](Arrays/02_HashMap_Set/3_ElementFrequency.js) |
+| 4 | [Find duplicate elements](Arrays/02_HashMap_Set/4_findDuplictate_Elements_InArray.js) |
+| 5 | [Longest consecutive sequence](Arrays/02_HashMap_Set/5_LongestConsecutiveSequence.js) |
+| 6 | [Top K frequent elements](Arrays/02_HashMap_Set/6_TopKFrequentElements.js) |
+| 7 | [Intersection of two arrays (unique, and with counts)](Arrays/02_HashMap_Set/7_IntersectionOfTwoArrays.js) |
+
+### 03 Two pointers
+
+Clue words: "sorted / in place / reverse / move" · Folder: [`Arrays/03_Two_Pointers/`](Arrays/03_Two_Pointers/)
+
+| # | Program |
+|---|---|
+| 1 | [Three Sum = 0](Arrays/03_Two_Pointers/1_ThreeSum_0.js) |
+| 2 | [Reverse / rotate an array by k](Arrays/03_Two_Pointers/2_reverseArrayByK.js) |
+| 3 | [Move zeros to the end](Arrays/03_Two_Pointers/3_MoveZerosToEnd.js) |
+| 4 | [Remove duplicates (sorted)](Arrays/03_Two_Pointers/4_removeDuplicates_Sorted.js) |
+| 5 | [Container with most water](Arrays/03_Two_Pointers/5_ContainerWithMostWater.js) |
+| 6 | [Merge sorted array (two sorted arrays, in place)](Arrays/03_Two_Pointers/6_MergeSortedArray.js) |
+| 7 | [Sort colors: 0s, 1s, 2s (Dutch national flag)](Arrays/03_Two_Pointers/7_SortColors.js) |
+| 8 | [Trapping rain water](Arrays/03_Two_Pointers/8_TrappingRainWater.js) |
+| 9 | [Find the duplicate number (Floyd's fast/slow pointers)](Arrays/03_Two_Pointers/9_FindTheDuplicateNumber.js) |
+| 10 | [Next permutation](Arrays/03_Two_Pointers/10_NextPermutation.js) |
+
+### 04 Kadane / running sum
+
+Clue words: "contiguous subarray, max sum" · Folder: [`Arrays/04_Kadane_Running_Sum/`](Arrays/04_Kadane_Running_Sum/)
+
+| # | Program |
+|---|---|
+| 1 | [Maximum subarray sum](Arrays/04_Kadane_Running_Sum/1_Maximu_Sub_Array_Sum.js) |
+| 2 | [Largest subarray (return the subarray)](Arrays/04_Kadane_Running_Sum/2_LargestSubarray_returnArray.js) |
+| 3 | [Maximum product subarray](Arrays/04_Kadane_Running_Sum/3_MaximumProductSubarray.js) |
+
+### 05 Searching
+
+Clue words: "find / position", "sorted", "O(log n)" · Folder: [`Arrays/05_Searching/`](Arrays/05_Searching/)
+
+| # | Program |
+|---|---|
+| 1 | [Search insert position](Arrays/05_Searching/1_search_InsertPosition.js) |
+| 2 | [Binary search](Arrays/05_Searching/2_Searching_BinarySearch.js) |
+| 3 | [Linear search](Arrays/05_Searching/3_Searching_LinearSearch.js) |
+| 4 | [Search in rotated sorted array](Arrays/05_Searching/4_SearchInRotatedSortedArray.js) |
+| 5 | [Find minimum in rotated sorted array](Arrays/05_Searching/5_FindMinimumInRotatedSortedArray.js) |
+| 6 | [First and last position of an element](Arrays/05_Searching/6_FirstAndLastPosition.js) |
+
+### 06 Sorting
+
+Clue words: "sort without built-ins" · Folder: [`Arrays/06_Sorting/`](Arrays/06_Sorting/)
+
+| # | Program |
+|---|---|
+| 1 | [Bubble sort](Arrays/06_Sorting/1_BubbleSort.js) |
+| 2 | [Selection sort](Arrays/06_Sorting/2_SelectionSort.js) |
+| 3 | [Quick sort (divide & conquer)](Arrays/06_Sorting/3_QuickSort.js) |
+| 4 | [Merge sort (divide & conquer, stable)](Arrays/06_Sorting/4_MergeSort.js) |
+| 5 | [Kth largest element (quickselect)](Arrays/06_Sorting/5_KthLargestElement.js) |
+
+### 07 Compare by index
+
+Clue words: "two arrays/strings, same position" · Folder: [`Arrays/07_Compare_By_Index/`](Arrays/07_Compare_By_Index/)
+
+| # | Program |
+|---|---|
+| 1 | [Equality of two arrays](Arrays/07_Compare_By_Index/1_equalityOf_2Arays.js) |
+| 2 | [Hamming distance (strings)](Arrays/07_Compare_By_Index/2_hammingDistance.js) |
+| 3 | [Matching indices](Arrays/07_Compare_By_Index/3_MatchingIndices.js) |
+
+### 08 Bit manipulation
+
+Clue words: "bits / binary / XOR" · Folder: [`Arrays/08_Bit_Manipulation/`](Arrays/08_Bit_Manipulation/)
+
+| # | Program |
+|---|---|
+| 1 | [Hamming distance (bits)](Arrays/08_Bit_Manipulation/1_Hammingdistance_Bits.js) |
+
+### 09 Prefix sum
+
+Clue words: "subarray sum equals k / range sum / product except self" · Folder: [`Arrays/09_Prefix_Sum/`](Arrays/09_Prefix_Sum/)
+
+| # | Program |
+|---|---|
+| 1 | [Product of array except self](Arrays/09_Prefix_Sum/1_ProductOfArrayExceptSelf.js) |
+| 2 | [Subarray sum equals K](Arrays/09_Prefix_Sum/2_SubarraySumEqualsK.js) |
+
+### 10 Intervals
+
+Clue words: "intervals / meetings / ranges / overlap" · Folder: [`Arrays/10_Intervals/`](Arrays/10_Intervals/)
+
+| # | Program |
+|---|---|
+| 1 | [Merge intervals](Arrays/10_Intervals/1_MergeIntervals.js) |
+
+### 11 Sliding window
+
+Clue words: "subarray of size k / longest or shortest subarray with ... (positive numbers)" · Folder: [`Arrays/11_Sliding_Window/`](Arrays/11_Sliding_Window/)
+
+| # | Program |
+|---|---|
+| 1 | [Maximum sum subarray of size K (fixed window)](Arrays/11_Sliding_Window/1_MaxSumSubarrayOfSizeK.js) |
+| 2 | [Minimum size subarray sum (variable window)](Arrays/11_Sliding_Window/2_MinSizeSubarraySum.js) |
+
+### 12 Matrix
+
+Clue words: "matrix / grid / 2D array / rotate / spiral" · Folder: [`Arrays/12_Matrix/`](Arrays/12_Matrix/)
+
+| # | Program |
+|---|---|
+| 1 | [Spiral matrix](Arrays/12_Matrix/1_SpiralMatrix.js) |
+| 2 | [Rotate image 90° (in place)](Arrays/12_Matrix/2_RotateImage.js) |
+| 3 | [Set matrix zeroes](Arrays/12_Matrix/3_SetMatrixZeroes.js) |
+
+### 13 Greedy
+
+Clue words: "can you reach / minimum jumps / best local choice" · Folder: [`Arrays/13_Greedy/`](Arrays/13_Greedy/)
+
+| # | Program |
+|---|---|
+| 1 | [Jump game](Arrays/13_Greedy/1_JumpGame.js) |
 
 ---
 
