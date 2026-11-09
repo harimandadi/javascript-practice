@@ -184,7 +184,7 @@ console.log(globalLinearSearchMapFilter([4, 5, 0, 7, 0, 1, 2], 9)); // Output: -
  *  the ITEM itself, not index   | loop + return    | find(item => condition)
  *
  *  All of these are LINEAR search: they check items one by one → O(n).
- *  For a SORTED array, binary search is faster: O(log n) (see 22_Searching_BinarySearch.js).
+ *  For a SORTED array, binary search is faster: O(log n) (see 2_Searching_BinarySearch.js).
  */
 console.log([4, 5, 6, 7, 0, 1, 2].includes(7));             // Output: true
 console.log([4, 5, 6, 7, 0, 1, 2].find((num) => num > 5));  // Output: 6
