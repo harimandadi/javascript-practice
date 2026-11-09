@@ -1,0 +1,15 @@
+# Dependencies (none needed today, but keep them out if ever added)
+node_modules/
+
+# Editors / OS
+.vscode/*
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and secrets
+*.log
+.env
+.env.*
