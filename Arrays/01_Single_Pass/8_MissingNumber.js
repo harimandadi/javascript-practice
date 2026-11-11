@@ -42,25 +42,6 @@ function missingNumberBrute(nums) {
   return -1;                                    // can't happen for valid input
 }
 
-// ── OPTIMAL 1: sum formula, O(n) ─────────────────────────────────────────────
-function missingNumber(nums) {
-  const n = nums.length;                        // range is 0..n (n + 1 numbers, one missing)
-  const expected = (n * (n + 1)) / 2;           // STEP 1: 0 + 1 + ... + n  (Gauss formula)
-
-  let actual = 0;
-  for (const num of nums) actual += num;        // STEP 2: what the array really adds up to
-
-  return expected - actual;                     // the gap = the missing number
-}
-
-// ── OPTIMAL 2: XOR, O(n) ── no risk of very large sums ───────────────────────
-function missingNumberXor(nums) {
-  let xor = nums.length;                        // start with n (the index loop below stops at n - 1)
-  for (let i = 0; i < nums.length; i++) {
-    xor ^= i ^ nums[i];                         // XOR in the index AND the value
-  }
-  return xor;                                   // every pair cancelled; the missing one is left
-}
 
 /*
  * ═════════════════════════════════════════════════════════════════════════════
