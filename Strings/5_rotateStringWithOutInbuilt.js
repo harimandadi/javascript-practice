@@ -1,35 +1,37 @@
-/**
- * Right rotates a string by K positions WITHOUT using the slice() method.
- * Example: "abcde", k = 2 -> "deabc"
- * 
- * @param {string} s - The input string to rotate
- * @param {number} k - The number of positions to shift right
- * @returns {string} The resulting rotated string
- */
+function rotateStringByReversal(str, k) {
+  const n = str.length;
+  if (n <= 1) return str;                 // nothing to rotate
+  k = k % n;                              // k = 7 on 5 letters is the same as k = 2
+  if (k === 0) return str;
+
+  const chars = [...str];                 // "abcde" → ['a','b','c','d','e']   string → ARRAY (now swappable)
+
+  function reverse(start, end) {          // EXACTLY the same helper as rotateArray
+    while (start < end) {
+      [chars[start], chars[end]] = [chars[end], chars[start]];
+      start++;
+      end--;
+    }
+  }
+
+  reverse(0, n - 1);                      // Step A: reverse everything
+  reverse(0, k - 1);                      // Step B: reverse the first k
+  reverse(k, n - 1);                      // Step C: reverse the rest
+
+  return chars.join('');                  // ARRAY → string again
+}
+
 function rotateRightWithoutSlice(s, k) {
   const n = s.length;
   if (n === 0) return s;
 
-  // 1. Normalize k to avoid redundant loops
   const effectiveK = k % n;
   if (effectiveK === 0) return s;
 
   let rotatedString = "";
 
-  /* ==========================================================
-   * ITERATION PHASE: Build the rotated string character by character
-   * ========================================================== */
   for (let i = 0; i < n; i++) {
-    // Calculate the mapped index from the original string.
-    // Example for "abcde" (n=5) and effectiveK=2 (n - effectiveK = 3):
-    // i = 0 -> (0 + 3) % 5 = index 3 ('d')
-    // i = 1 -> (1 + 3) % 5 = index 4 ('e')
-    // i = 2 -> (2 + 3) % 5 = index 0 ('a')
-    // i = 3 -> (3 + 3) % 5 = index 1 ('b')
-    // i = 4 -> (4 + 3) % 5 = index 2 ('c')
     const originalIndex = (i + (n - effectiveK)) % n;
-    
-    // Append the character to our new string result
     rotatedString += s[originalIndex];
   }
 
@@ -57,3 +59,5 @@ console.log(`Rotated Right by ${shiftCount}: ${rotatedResult}`);
  * 5. Return                            return rotatedString;
  * ═════════════════════════════════════════════════════════════════════════════
  */
+console.log(rotateStringByReversal("abcde", 2));   // "deabc"
+console.log(rotateStringByReversal("abcde", 7));   // "deabc"  (7 % 5 = 2)
