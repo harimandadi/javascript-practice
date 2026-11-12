@@ -210,16 +210,19 @@ for (let i = 0; i < n; i++)                                             // rotat
 m.forEach((row) => row.reverse());                                      // ...then reverse each row
 ```
 
-**04 Kadane with max AND min** (max product subarray)
+**04 Product from both ends** (max product subarray): multiply from the left and the right, restart after a 0
 ```js
-let maxHere = arr[0], minHere = arr[0], best = arr[0];
-for (let i = 1; i < arr.length; i++) {
-  if (arr[i] < 0) [maxHere, minHere] = [minHere, maxHere];   // a negative flips them
-  maxHere = Math.max(arr[i], maxHere * arr[i]);
-  minHere = Math.min(arr[i], minHere * arr[i]);
-  best = Math.max(best, maxHere);
+let fromLeft = 1, fromRight = 1, best = -Infinity;
+for (let i = 0; i < arr.length; i++) {
+  fromLeft *= arr[i];
+  fromRight *= arr[arr.length - 1 - i];
+  best = Math.max(best, fromLeft, fromRight);   // keep the biggest
+  if (fromLeft === 0) fromLeft = 1;             // a 0 restarts the product
+  if (fromRight === 0) fromRight = 1;
 }
+return best || 0;                               // -2 × 0 is -0 in JS
 ```
+Classic alternative: keep the max AND min product ending here, `maxHere = max(num, maxHere*num, minHere*num)` (a negative turns the min into the max).
 
 **01 Scan from the right** (leaders)
 ```js
