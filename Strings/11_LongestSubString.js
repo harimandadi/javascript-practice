@@ -63,3 +63,17 @@ function lengthOfLongestSubstring(s) {
 
 // Test Execution
 console.log(lengthOfLongestSubstring("abcabcbb")); // Output: 3 ("abc")
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "GROW on the right; on a duplicate SHRINK from the left; record the biggest window."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Set + left + max                  let charSet = new Set(); let left = 0; let maxLength = 0;
+ * 2. right walks the string            for (let right = 0; right < s.length; right++)
+ * 3. Duplicate → shrink from left      while (charSet.has(s[right])) { charSet.delete(s[left]); left++; }
+ * 4. Add the new char                  charSet.add(s[right]);
+ * 5. Record the window size            maxLength = Math.max(maxLength, right - left + 1);
+ * 6. Return                            return maxLength;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

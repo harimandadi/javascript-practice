@@ -65,3 +65,17 @@ function compressString(s) {
 
 // --- Test Example ---
 console.log(compressString("aab")); // Output: "aab"
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "COUNT the run; when the NEXT char differs, write char + count."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty → ""                        if (!s || s.length === 0) return "";
+ * 2. Empty result, count 0             let compressed = ""; let count = 0;
+ * 3. Each char → count it              count++;
+ * 4. Last char OR next differs?        if (i + 1 >= s.length || s[i] !== s[i + 1])
+ *       → write char + count, reset       { compressed += s[i] + count; count = 0; }
+ * 5. Use it only if shorter            return compressed.length < s.length ? compressed : s;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

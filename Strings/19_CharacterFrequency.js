@@ -57,3 +57,15 @@ console.log(characterFrequency("programming").char);   // Output: "r"  (r, g, m 
 console.log(characterFrequency("aaabbc").count);       // Output: 3
 console.log(characterFrequency(""));                   // Output: { counts: {}, char: '', count: 0 }
 // Tip: ignore case and spaces first if needed → s.toLowerCase().replace(/\s/g, '')
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "COUNT every char into a map, then SCAN the map for the biggest count."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty count map                   const counts = {};
+ * 2. Each char → +1                    counts[char] = (counts[char] || 0) + 1;
+ * 3. Scan for the biggest count        for (const [char, count] of Object.entries(counts)) if (count > maxCount) { maxChar = char; maxCount = count; }
+ * 4. Return map + winner               return { counts, char: maxChar, count: maxCount };
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

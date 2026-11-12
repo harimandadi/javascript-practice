@@ -55,3 +55,17 @@ const countRegex = (s) => ({
 });
 console.log(countRegex("Hello World 123!"));
 // Output: { vowels: 3, consonants: 7, digits: 3, spaces: 2, specials: 1 }
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "One loop, five buckets: LETTER (vowel/consonant) → DIGIT → SPACE → else SPECIAL."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Five counters at 0                const result = { vowels: 0, consonants: 0, digits: 0, spaces: 0, specials: 0 };
+ * 2. Letter? vowel or consonant        if (lower >= 'a' && lower <= 'z') VOWELS.includes(lower) ? result.vowels++ : result.consonants++;
+ * 3. Digit?                            else if (char >= '0' && char <= '9') result.digits++;
+ * 4. Space?                            else if (char === ' ') result.spaces++;
+ * 5. Anything else → special           else result.specials++;
+ * 6. Return                            return result;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

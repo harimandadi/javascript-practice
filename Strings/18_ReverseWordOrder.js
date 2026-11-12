@@ -44,3 +44,15 @@ console.log(reverseWordOrder("  Playwright   is  fast "));  // Output: "fast is 
 console.log(reverseWordOrder("single"));                    // Output: "single"
 console.log(reverseWordOrder("   "));                       // Output: ""  (only spaces)
 // Short built-in version: s.trim().split(/\s+/).reverse().join(' ')
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "SPLIT into words, read them BACKWARDS, JOIN with one space."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Trim + split on any spaces        const words = s.trim().split(/\s+/);
+ * 2. Nothing there → ""                if (words[0] === '') return '';
+ * 3. Push words last to first          for (let i = words.length - 1; i >= 0; i--) result.push(words[i]);
+ * 4. Join with one space               return result.join(' ');
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

@@ -53,3 +53,14 @@ let messyString = "Hello, World! @2026 #JavaScript_Code$% 🚀";
 console.log("Original String:", messyString);
 console.log("Cleaned String: ", removeJunkCharacters(messyString)); 
 // Output: "Hello World 2026 JavaScriptCode "
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Remove everything that is NOT a letter, digit or space."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Pattern for what is NOT allowed   let regex = /[^a-zA-Z0-9 ]/g;
+ * 2. Replace those with nothing        let cleanedString = str.replace(regex, "");
+ * 3. Return                            return cleanedString;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

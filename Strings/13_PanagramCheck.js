@@ -53,3 +53,16 @@ console.log("Is it a pangram?", isPangram(pangramSentence));
 
 console.log("Is it a pangram?", isPangram(normalSentence)); 
 // Output: false (missing many letters like f, g, j, etc.)
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Collect unique letters a–z in a Set; 26 of them → pangram."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Lowercase everything              let lowerStr = str.toLowerCase();
+ * 2. Empty Set of letters              let seenLetters = new Set();
+ * 3. Letter a–z → add it               if (char >= 'a' && char <= 'z') seenLetters.add(char);
+ * 4. 26 reached → true early           if (seenLetters.size === 26) return true;
+ * 5. End → is it 26?                   return seenLetters.size === 26;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

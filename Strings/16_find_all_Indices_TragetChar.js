@@ -24,3 +24,15 @@ function findAllIndices(arr, target) {
 // Test the function
 const result = findAllIndices(["a", "p", "p", "l", "e"], "p");
 console.log(result); // Output: [1, 2]
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Scan everything; on a match, SAVE the index."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty list of indices             let indices = [];
+ * 2. Each position i                   for (let i = 0; i < arr.length; i++)
+ * 3. Match → save i                    if (arr[i] === target) indices.push(i);
+ * 4. Return                            return indices;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

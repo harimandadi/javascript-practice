@@ -35,3 +35,16 @@ function groupAnagrams(strs) {
 // --- Test Example ---
 console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])); 
 // Output: [ [ 'eat', 'tea', 'ate' ], [ 'tan', 'nat' ], [ 'bat' ] ]
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "SORT the word = its KEY → drop the word in the KEY's bucket."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Make an empty map of buckets      const map = {};
+ * 2. Each word → sort its letters      const sortedKey = currentWord.split('').sort().join('');
+ * 3. No bucket yet → create one        if (!map[sortedKey]) map[sortedKey] = [];
+ * 4. Put the ORIGINAL word in          map[sortedKey].push(currentWord);
+ * 5. Return only the buckets           return Object.values(map);
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

@@ -48,3 +48,15 @@ console.log(removeDuplicateChars(""));              // Output: ""
 
 // One-line version: a Set keeps the first occurrence in order
 console.log([...new Set("programming")].join(''));  // Output: "progamin"
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Remember what you've SEEN. First time → keep. Seen before → skip."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Seen set + empty result           const seen = new Set(); let result = '';
+ * 2. Not seen → remember and keep      if (!seen.has(char)) { seen.add(char); result += char; }
+ * 3. Return                            return result;
+ *    One line                          [...new Set(s)].join('')
+ * ═════════════════════════════════════════════════════════════════════════════
+ */
