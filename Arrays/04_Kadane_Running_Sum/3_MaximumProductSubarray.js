@@ -2,8 +2,8 @@
  * Maximum Product Subarray   (LeetCode 152 · asked at Amazon, Microsoft, Google, LinkedIn)
  * ═════════════════════════════════════════════════════════════════════════════
  * PROBLEM STATEMENT
- *   Given an integer array nums, find the contiguous subarray with the LARGEST PRODUCT
- *   and return that product.
+ *   Given an integer array nums, find the contiguous (side-by-side) subarray with the
+ *   LARGEST PRODUCT and return that product.
  *
  * EXAMPLES
  *   Input : nums = [2, 3, -2, 4]
@@ -18,52 +18,80 @@
  * OUTPUT FORMAT
  *   A single number: the largest product of any contiguous subarray.
  *
- * MEMORY: "Kadane, but keep BOTH the max AND the min (a negative flips them)."
- *   STEP 1 → if the current number is NEGATIVE, SWAP max and min
- *            (biggest × negative = smallest, smallest × negative = biggest)
- *   STEP 2 → for max and min: extend (× num) or start fresh (num), whichever is bigger / smaller;
- *            keep the best max
+ * WHY IT IS TRICKY (compared with maximum SUM)
+ *   - A NEGATIVE number flips the sign: a very small product can suddenly become the biggest.
+ *   - A ZERO wipes the product out: everything after it has to start again.
  *
- * WHY TRACK THE MIN?
- *   With sums (max subarray SUM) a very negative running total is useless. With products it's
- *   valuable: the smallest (most negative) product × one more negative becomes the LARGEST.
- *   In [-2, 3, -4], the min product -6 × -4 = 24 is the answer.
+ * MEMORY: "Multiply from the LEFT, multiply from the RIGHT, RESTART after a 0, keep the BIGGEST."
+ *   STEP 1 → keep two running products: one reading left → right, one reading right → left
+ *   STEP 2 → after each multiply, keep the biggest number you have seen
+ *   STEP 3 → if a running product becomes 0, restart it at 1
+ *
+ * WHY THAT WORKS (the one trick)
+ *   Zeros cut the array into pieces. Inside one piece (no zeros):
+ *     - EVEN number of negatives → they cancel out: the whole piece is the best (a run from the LEFT)
+ *     - ODD number of negatives  → one negative must be left out: either the FIRST one
+ *       (best run ends at the RIGHT edge) or the LAST one (best run starts at the LEFT edge)
+ *   So the answer always starts at the left edge or ends at the right edge of a piece,
+ *   and scanning from both sides checks every one of those runs.
  *
  * COST
- *   Brute force: O(n²) (every start, extend right)
- *   Optimal    : O(n) time, O(1) space
+ *   Brute force          : O(n²) time (every start, extend right)
+ *   Left + right (easy)  : O(n) time, O(1) space   ← easiest to remember
+ *   Max + min (classic)  : O(n) time, O(1) space   ← the version most interviewers expect
  * ═════════════════════════════════════════════════════════════════════════════
  */
 
 // ── BRUTE FORCE: O(n²) ── every start, extend right ──────────────────────────
 function maxProductBrute(nums) {
-  let best = nums[0];
-  for (let i = 0; i < nums.length; i++) {
-    let product = 1;
-    for (let j = i; j < nums.length; j++) {
-      product *= nums[j];                       // product of nums[i..j]
-      best = Math.max(best, product);
+  let best = -Infinity;                         // nothing seen yet
+  for (let start = 0; start < nums.length; start++) {
+    let product = 1;                            // product of nums[start..end]
+    for (let end = start; end < nums.length; end++) {
+      product *= nums[end];                     // grow the subarray one step to the right
+      best = Math.max(best, product);           // remember the biggest
     }
   }
   return best;
 }
 
-// ── OPTIMAL: Kadane with max AND min, O(n) ───────────────────────────────────
+// ── OPTIMAL (EASY): multiply from the left AND from the right, O(n) ──────────
 function maxProduct(nums) {
-  let maxHere = nums[0];                        // largest product of a subarray ENDING here
-  let minHere = nums[0];                        // smallest product of a subarray ENDING here
-  let best = nums[0];                           // largest product seen anywhere
+  const n = nums.length;
+  let fromLeft = 1;                             // STEP 1: running product, left → right
+  let fromRight = 1;                            //         running product, right → left
+  let best = -Infinity;                         //         biggest product seen so far
+
+  for (let i = 0; i < n; i++) {
+    fromLeft *= nums[i];                        // next number from the left
+    fromRight *= nums[n - 1 - i];               // next number from the right
+
+    best = Math.max(best, fromLeft, fromRight); // STEP 2: keep the biggest
+
+    if (fromLeft === 0) fromLeft = 1;           // STEP 3: hit a 0 → restart (AFTER updating best,
+    if (fromRight === 0) fromRight = 1;         //         so a lone 0 can still be the answer)
+  }
+
+  return best || 0;                             // -2 × 0 gives -0 in JS: turn it into a plain 0
+}
+
+// ── OPTIMAL (CLASSIC): keep the biggest AND smallest product ending here, O(n) ─
+//    Same idea as Kadane, but no swap to remember: just pick from the three options.
+function maxProductMinMax(nums) {
+  let maxHere = nums[0];                        // biggest product of a subarray ENDING here
+  let minHere = nums[0];                        // smallest (most negative) one ENDING here
+  let best = nums[0];                           // biggest product anywhere
 
   for (let i = 1; i < nums.length; i++) {
     const num = nums[i];
 
-    if (num < 0) {                              // STEP 1: negative flips big ↔ small
-      [maxHere, minHere] = [minHere, maxHere];  //   so swap them before multiplying
-    }
+    const startFresh = num;                     // a) start again at this number (also handles a 0)
+    const extendMax = maxHere * num;            // b) extend the biggest  (wins when num > 0)
+    const extendMin = minHere * num;            // c) extend the smallest (wins when num < 0: − × − = +)
 
-    maxHere = Math.max(num, maxHere * num);     // STEP 2: extend, or start fresh at num
-    minHere = Math.min(num, minHere * num);     //         (start fresh also "resets" after a 0)
-    best = Math.max(best, maxHere);             //         keep the best
+    maxHere = Math.max(startFresh, extendMax, extendMin);   // the new biggest
+    minHere = Math.min(startFresh, extendMax, extendMin);   // the new smallest
+    best = Math.max(best, maxHere);                         // remember the overall best
   }
 
   return best;
@@ -71,40 +99,60 @@ function maxProduct(nums) {
 
 /*
  * ═════════════════════════════════════════════════════════════════════════════
- * EVERY ITERATION for nums = [-2, 3, -4]
+ * EVERY ITERATION of maxProduct for nums = [2, 3, -2, 4]
+ *
+ *   i | from left | fromLeft | from right | fromRight | best
+ *   --|-----------|----------|------------|-----------|-----
+ *   0 |     2     |    2     |      4     |     4     |  4
+ *   1 |     3     |    6     |     -2     |    -8     |  6   ← [2, 3]
+ *   2 |    -2     |   -12    |      3     |   -24     |  6
+ *   3 |     4     |   -48    |      2     |   -48     |  6
+ *
+ *   Answer 6 ✅
+ *
+ * AND for nums = [-2, 0, -1]   (the 0 restarts both running products)
+ *
+ *   i | from left | fromLeft          | from right | fromRight         | best
+ *   --|-----------|-------------------|------------|-------------------|-----
+ *   0 |    -2     |  -2               |     -1     |  -1               | -1
+ *   1 |     0     |   0 → restart at 1|      0     |   0 → restart at 1|  0
+ *   2 |    -1     |  -1               |     -2     |  -2               |  0
+ *
+ *   Answer 0 ✅
+ *
+ * EVERY ITERATION of maxProductMinMax for nums = [-2, 3, -4]
  *   start: maxHere = -2, minHere = -2, best = -2
  *
- *   i | num | negative → swap? | maxHere = max(num, maxHere×num) | minHere = min(num, minHere×num) | best
- *   --|-----|------------------|---------------------------------|---------------------------------|-----
- *   1 |  3  | no               | max(3, -2×3 = -6)   =  3        | min(3, -2×3 = -6)   = -6        |  3
- *   2 | -4  | yes → max=-6, min=3 | max(-4, -6×-4 = 24) = 24     | min(-4, 3×-4 = -12) = -12       | 24  ✅
+ *   i | num | startFresh | maxHere × num | minHere × num | new maxHere | new minHere | best
+ *   --|-----|------------|---------------|---------------|-------------|-------------|-----
+ *   1 |  3  |     3      |      -6       |      -6       |      3      |     -6      |  3
+ *   2 | -4  |    -4      |     -12       |      24       |     24      |    -12      | 24  ✅
  *
- *   Answer 24: the MIN (-6) × a negative (-4) became the MAX.
- *
- * AND for nums = [2, 3, -2, 4]
- *   i | num | swap? | maxHere | minHere | best
- *   --|-----|-------|---------|---------|-----
- *     |     | start |    2    |    2    |  2
- *   1 |  3  | no    |    6    |    3    |  6
- *   2 | -2  | yes   |   -2    |  -12    |  6
- *   3 |  4  | no    |    4    |  -48    |  6   ✅  → [2, 3]
+ *   Answer 24: the smallest product (-6) × a negative (-4) became the biggest.
  *
  * TRAPS
- *   1. Tracking only the max fails for [-2, 3, -4] (it would answer 3, not 24).
- *   2. Swap BEFORE multiplying, and use the OLD values for both updates (the swap handles that).
- *   3. Start from nums[0], not 1 or 0: for [-3] the answer is -3.
- *   4. A 0 resets everything: max(0, …) and min(0, …) with "start fresh at num" handle it.
+ *   1. Start best at -Infinity (or nums[0]), NOT 0: for [-3] the answer is -3.
+ *   2. Update best BEFORE restarting after a 0, so [-2, 0, -1] correctly returns 0.
+ *   3. Tracking only the max fails for [-2, 3, -4] (it would answer 3, not 24).
+ *   4. In the classic version, compute BOTH products from the OLD maxHere / minHere
+ *      (that's why extendMax and extendMin are saved first).
+ *   5. JavaScript has a NEGATIVE ZERO: -2 × 0 = -0, which prints as "-0".
+ *      `return best || 0` turns it into 0 (-0 is falsy, every other answer is unchanged).
  *
  * INTERVIEW LINE
- *   "Like Kadane, but a negative number turns the smallest product into the largest, so I keep
- *    both the max and the min product ending at each position, swap them on a negative, and
- *    take extend-or-restart for each. O(n) time, O(1) space."
+ *   "Zeros split the array, and inside each piece the best product always starts at the left
+ *    edge or ends at the right edge, because with an odd number of negatives I drop the first
+ *    or the last one. So I multiply from both ends, restart after a zero and keep the maximum:
+ *    O(n) time, O(1) space. The classic alternative keeps the max and min product ending at each
+ *    index, because a negative number turns the smallest product into the largest."
  * ═════════════════════════════════════════════════════════════════════════════
  */
 
 // --- TEST IT IN VS CODE ---
-console.log(maxProduct([2, 3, -2, 4]));     // 6
-console.log(maxProduct([-2, 3, -4]));       // 24
-console.log(maxProduct([-2, 0, -1]));       // 0
-console.log(maxProduct([-3]));              // -3
-console.log(maxProductBrute([-2, 3, -4]));  // 24 (brute force, same answer)
+console.log(maxProduct([2, 3, -2, 4]));          // 6
+console.log(maxProduct([-2, 3, -4]));            // 24
+console.log(maxProduct([-2, 0, -1]));            // 0
+console.log(maxProduct([-3]));                   // -3
+console.log(maxProduct([2, -5, -2, -4, 3]));     // 24  → [-2, -4, 3]
+console.log(maxProductMinMax([-2, 3, -4]));      // 24  (classic version, same answer)
+console.log(maxProductBrute([-2, 3, -4]));       // 24  (brute force, same answer)
