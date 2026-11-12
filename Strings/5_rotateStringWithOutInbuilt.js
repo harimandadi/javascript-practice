@@ -44,3 +44,16 @@ const rotatedResult = rotateRightWithoutSlice(inputString, shiftCount);
 console.log(`Original String : ${inputString}`);
 console.log(`Rotated Right by ${shiftCount}: ${rotatedResult}`); 
 // Output: "deabc"
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "New position i reads from old position (i + n − k) % n."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty → return as is              if (n === 0) return s;
+ * 2. Shrink k                          const effectiveK = k % n;  if (effectiveK === 0) return s;
+ * 3. Empty result                      let rotatedString = "";
+ * 4. Each i → read the mapped index    rotatedString += s[(i + (n - effectiveK)) % n];
+ * 5. Return                            return rotatedString;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

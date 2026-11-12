@@ -76,51 +76,14 @@ console.log(isAnagram("", ""));                 // true   (two empty strings)
 
 /*
  * ═════════════════════════════════════════════════════════════════════════════
- * TRICK + ALGORITHM: how to WRITE this logic yourself (from a blank page)
+ * QUICK STEPS (English → code)
+ * MEMORY: "FILL the bag with s, EMPTY it with t. Missing or used up → false."
  * ═════════════════════════════════════════════════════════════════════════════
- *
- * THE TRICK (one idea)
- *   An anagram = SAME letters + SAME counts. Order doesn't matter, so don't compare order:
- *   compare COUNTS. Think of a BAG of letter tiles:
- *     - put every letter of s INTO the bag    (count up)
- *     - take every letter of t OUT of the bag  (count down)
- *     - a letter you can't take out → NOT an anagram
- *
- * ALGORITHM (write these 4 lines of English first, then turn each into code)
- *   1. If the lengths differ → return false.             if (s.length !== t.length) return false;
- *   2. Make an empty bag.                                const counts = {};
- *   3. For each letter of s → add 1 to its count.        counts[ch] = (counts[ch] || 0) + 1;
- *   4. For each letter of t:
- *        a. count is missing or 0 → return false.        if (!counts[ch]) return false;
- *        b. otherwise subtract 1.                        counts[ch]--;
- *   5. Loop finished → return true.                      return true;
- *
- * HOW TO REMEMBER THE CODE SHAPE
- *   "CHECK length → FILL with s → EMPTY with t → TRUE"
- *        1 line         1 loop       1 loop       1 line
- *
- * THE TWO LINES PEOPLE GET WRONG
- *   counts[ch] = (counts[ch] || 0) + 1;   → a new letter is undefined; "|| 0" turns it into 0 (else NaN)
- *   if (!counts[ch]) return false;        → catches BOTH undefined (missing) and 0 (used up)
- *
- * WHY NO "ARE ALL COUNTS 0?" CHECK AT THE END
- *   Same length + no count ever went below 0 → t took out exactly what s put in → the bag is empty.
- *
- * OTHER WAYS (say these in an interview after the main solution)
- *   Sort and compare   : [...s].sort().join('') === [...t].sort().join('')    O(n log n), shortest to write
- *   Array of 26        : count[ch.charCodeAt(0) - 97]++ / --                  fastest, only for a–z
- *   Map + [...s]       : works for any characters (Unicode / emoji)
- *   Ignore case/spaces : clean first → s.toLowerCase().replace(/[^a-z]/g, '')
- *
- * SELF-CHECK BEFORE SUBMITTING (test these 4 inputs)
- *   ("anagram", "nagaram") → true     happy path
- *   ("rat", "car")         → false    missing letter
- *   ("aab", "abb")         → false    used-up letter
- *   ("ab", "a")            → false    different lengths
- *
- * INTERVIEW LINE
- *   "Anagrams have the same letters with the same counts. I check the lengths, count every letter
- *    of s, then walk t and use one copy per letter, returning false as soon as a letter is missing
- *    or used up. Finishing the loop means every count is back to zero. O(n) time, O(k) space."
+ * 1. Lengths differ → false            if (s.length !== t.length) return false;
+ * 2. Make an empty bag                 const counts = {};
+ * 3. Each letter of s → +1             counts[ch] = (counts[ch] || 0) + 1;
+ * 4. Each letter of t → missing/0?     if (!counts[ch]) return false;
+ *                      otherwise −1    counts[ch]--;
+ * 5. Loop finished → true              return true;
  * ═════════════════════════════════════════════════════════════════════════════
  */

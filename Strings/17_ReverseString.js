@@ -65,3 +65,16 @@ console.log(reverseString("QA Lead"));            // Output: "daeL AQ"
 console.log(reverseStringTwoPointers("hello"));   // Output: "olleh"
 console.log(reverseStringTwoPointers("abcd"));    // Output: "dcba"  (even length: no middle)
 console.log(reverseString(""));                   // Output: ""      (empty string)
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Read it BACKWARDS, or SWAP the two ends and walk inward."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty result                      let reversed = '';
+ * 2. i from the last index down to 0   for (let i = s.length - 1; i >= 0; i--)
+ * 3. Add that char                     reversed += s[i];
+ * 4. Return                            return reversed;
+ *    Two-pointer way                   const chars = [...s]; while (left < right) swap + left++ + right--; return chars.join('');
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

@@ -52,3 +52,15 @@ console.log(findDuplicateChars("abc"));           // Output: []  (no duplicates)
 
 // Variation: ignore case and spaces → "Test Lead"
 console.log(findDuplicateChars("Test Lead".toLowerCase().replace(/\s/g, '')));   // Output: [ 't', 'e' ]
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "COUNT everything, then KEEP the counts bigger than 1."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty count map                   const counts = {};
+ * 2. Each char → +1                    counts[char] = (counts[char] || 0) + 1;
+ * 3. Count > 1 → it's a duplicate      for (const char in counts) if (counts[char] > 1) duplicates.push(char);
+ * 4. Return                            return duplicates;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

@@ -42,3 +42,16 @@ let inputString = "JavaScript";
 console.log("Original String:", inputString);
 console.log("Replaced Vowels: ", replaceVowelsWithX(inputString)); 
 // Output: "JxvxScxprt" (a, a, i replaced with x)
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Vowel → 'x', anything else → copy it."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty result + vowel list         let result = ""; let vowels = "aeiouAEIOU";
+ * 2. Each char is a vowel → add x      if (vowels.includes(char)) result += "x";
+ * 3. Otherwise → copy the char         else result += char;
+ * 4. Return                            return result;
+ *    Regex way                         str.replace(/[aeiou]/gi, "x")
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

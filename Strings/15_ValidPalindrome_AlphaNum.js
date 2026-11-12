@@ -51,3 +51,16 @@ function isPalindrome(s) {
 const testString = "A man, a plan, a canal: Panama";
 console.log("Original:", testString);
 console.log("Is Palindrome:", isPalindrome(testString)); // Output: true
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "CLEAN it, then compare from both ENDS inward."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Keep only lowercase letters/digits const cleaned = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+ * 2. Pointers at both ends             let left = 0; let right = cleaned.length - 1;
+ * 3. Mismatch → false                  if (cleaned[left] !== cleaned[right]) return false;
+ * 4. Move inward                       left++; right--;
+ * 5. All matched → true                return true;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

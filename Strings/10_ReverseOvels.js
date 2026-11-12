@@ -46,3 +46,17 @@ let inputString = "IceCreAm";
 console.log("Original String:", inputString);
 console.log("Reversed Vowels:", reverseVowels(inputString)); 
 // Output: "AceCreIm"
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Two pointers: SKIP non-vowels, SWAP when both are vowels."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. String → array                    let chars = str.split('');
+ * 2. Pointers at both ends             let left = 0; let right = chars.length - 1;
+ * 3. Left is not a vowel → move it     if (!vowels.includes(chars[left])) left++;
+ * 4. Right is not a vowel → move it    else if (!vowels.includes(chars[right])) right--;
+ * 5. Both vowels → swap, move both     else { [chars[left], chars[right]] = [chars[right], chars[left]]; left++; right--; }
+ * 6. Array → string                    return chars.join('');
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

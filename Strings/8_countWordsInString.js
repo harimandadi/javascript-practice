@@ -42,3 +42,15 @@ function countWords(str) {
 let inputString = "  Hello   world! This is JS.  ";
 console.log("Input:", inputString);
 console.log("Word Count:", countWords(inputString)); // Output: 5
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Count a word when you STEP INTO it (space → letter)."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Count 0, not in a word            let wordCount = 0; let inWord = false;
+ * 2. Letter and not in a word yet      if (char !== " ") { if (!inWord) { wordCount++; inWord = true; } }
+ * 3. Space → you left the word         else inWord = false;
+ * 4. Return                            return wordCount;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

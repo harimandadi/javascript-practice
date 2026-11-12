@@ -30,3 +30,16 @@ function longestCommonPrefixVertical(strs) {
 // --- Test Examples ---
 console.log(longestCommonPrefixVertical(["flower", "flow", "flight"])); // Output: "fl"
 console.log(longestCommonPrefixVertical(["dog", "racecar", "car"]));     // Output: ""
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "Read COLUMN by column; first mismatch or short word → stop there."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty list → ""                   if (!strs || strs.length === 0) return "";
+ * 2. Each column i of the first word   for (let i = 0; i < strs[0].length; i++)
+ * 3. Compare with every other word     for (let j = 1; j < strs.length; j++)
+ * 4. Word ended or char differs → cut  if (i === strs[j].length || strs[j][i] !== char) return strs[0].substring(0, i);
+ * 5. No mismatch → whole first word    return strs[0];
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

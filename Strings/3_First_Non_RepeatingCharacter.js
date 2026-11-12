@@ -41,3 +41,16 @@ function firstUniqChar(s) {
 
 // --- Test Example ---
 console.log(firstUniqChar("leetcode")); // Output: 0
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "COUNT everything, then the FIRST one with count 1 wins."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Make an empty count map           const counts = {};
+ * 2. Each char → +1                    counts[char] = (counts[char] || 0) + 1;
+ * 3. Walk the string again from 0      for (let i = 0; i < s.length; i++)
+ * 4. Count is 1 → that's the answer    if (counts[s[i]] === 1) return i;
+ * 5. Nothing unique → -1               return -1;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

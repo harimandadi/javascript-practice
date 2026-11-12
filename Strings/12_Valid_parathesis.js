@@ -60,3 +60,15 @@ console.log(
         : "Brackets are incorrectly placed"
 ); 
 // Output: Brackets are incorrectly placed (because ')' doesn't match '[' correctly in LIFO order)
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "OPEN → push. CLOSE → pop must match. END → stack empty."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty stack + partner map         const stack = []; const bracketMap = { '}': '{', ']': '[', ')': '(' };
+ * 2. Opening bracket → push            if (char === '{' || char === '[' || char === '(') stack.push(char);
+ * 3. Closing bracket → pop must match  else if (closing) { if (stack.pop() !== bracketMap[char]) return false; }
+ * 4. Nothing left open → true          return stack.length === 0;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

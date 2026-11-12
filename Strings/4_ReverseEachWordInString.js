@@ -52,3 +52,17 @@ function reverseWordsBuiltIn(str) {
 
 // --- Test Example ---
 console.log(reverseWordsBuiltIn("hi js")); // Output: "ih sj"
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "PREPEND letters to flip the word; a SPACE ships the word."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Two empty strings                 let result = ""; let currentWord = "";
+ * 2. Letter → put it in FRONT          currentWord = char + currentWord;
+ * 3. Space → ship word + space         result += currentWord + " "; currentWord = "";
+ * 4. After the loop → ship last word   result += currentWord;
+ * 5. Return                            return result;
+ *    Built-in way                      str.split(" ").map(w => w.split("").reverse().join("")).join(" ")
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

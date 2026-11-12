@@ -27,3 +27,14 @@ function truncate(str, maxlength) {
 // Test the function with the sample input and print the result
 const result = truncate("Subscribe to RoadsideCoder", 9);
 console.log(result); // Output: "Subscribe..."
+
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "TOO LONG → cut and add '...'; otherwise keep it."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Longer than the max?              if (str.length > maxlength)
+ * 2. Cut + add the dots                return str.slice(0, maxlength - 1) + "...";
+ * 3. Otherwise unchanged               return str;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */

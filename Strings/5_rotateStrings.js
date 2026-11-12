@@ -40,5 +40,15 @@ const rotatedResult = rotateRight(inputString, shiftCount);
 console.log(`Original String : ${inputString}`);
 console.log(`Rotated Right by ${shiftCount}: ${rotatedResult}`);
 
-
-
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * QUICK STEPS (English → code)
+ * MEMORY: "CUT the tail, GLUE it in front."
+ * ═════════════════════════════════════════════════════════════════════════════
+ * 1. Empty → return as is              if (n === 0) return s;
+ * 2. Shrink k (k = 7 on 5 → 2)         const effectiveK = k % n;  if (effectiveK === 0) return s;
+ * 3. Cut the tail (last k)             const tailPart = s.slice(n - effectiveK);
+ * 4. Cut the head (the rest)           const headPart = s.slice(0, n - effectiveK);
+ * 5. Tail + head                       return tailPart + headPart;
+ * ═════════════════════════════════════════════════════════════════════════════
+ */
