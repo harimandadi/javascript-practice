@@ -2,7 +2,7 @@
 
 JavaScript programs and study material for coding interviews: **arrays, numbers and strings**, plus self-checking cheat sheets, exercises and interview-program guides.
 
-- **82 programs** in `Arrays/`, `Numbers/` and `Strings/`
+- **88 programs** in `Arrays/`, `Numbers/` and `Strings/`
 - **Study material** in [`practice/`](practice/): cheat sheets, exercises with solutions, 36 interview programs and 32 string programs, with a [guide](practice/README.md) (also as [PDF](practice/README.pdf) and [Word](practice/README.docx))
 
 Only **Node.js** is needed. There is nothing to install.
@@ -41,7 +41,7 @@ javascript-practice/
 │   ├── 12_Matrix/               spiral order, rotate image 90°, set matrix zeroes
 │   └── 13_Greedy/               jump game
 ├── Numbers/      9 number programs (factorial, Fibonacci, prime, Armstrong, ...)
-├── Strings/     18 string programs + Index.js (programs grouped by technique)
+├── Strings/     24 string programs + Index.js (programs grouped by technique)
 └── practice/    Cheat sheets, exercises, solutions and interview-program guides
     └── README.md / README.pdf / README.docx   Guide to the practice folder
 ```
@@ -257,18 +257,25 @@ Clue words: "can you reach / minimum jumps / best local choice" · Folder: [`Arr
 | 14 | [Longest common prefix](Strings/14_LongestCommonPrefix.js) | Comparison |
 | 15 | [Valid palindrome (alphanumeric)](Strings/15_ValidPalindrome_AlphaNum.js) | Two pointers |
 | 16 | [Find all indices of a target character](Strings/16_find_all_Indices_TragetChar.js) | Searching |
+| 17 | [Reverse a string without reverse()](Strings/17_ReverseString.js) | Two pointers |
+| 18 | [Reverse the word order](Strings/18_ReverseWordOrder.js) | String manipulation |
+| 19 | [Character frequency / most frequent character](Strings/19_CharacterFrequency.js) | Frequency counter |
+| 20 | [Remove duplicate characters](Strings/20_RemoveDuplicateChars.js) | Set (seen) |
+| 21 | [Find duplicate characters](Strings/21_FindDuplicateChars.js) | Frequency counter |
+| 22 | [Count vowels, consonants, digits, spaces, specials](Strings/22_CountCharacterTypes.js) | Single pass / regex |
 
 ### Strings by technique
 (from [`Strings/Index.js`](Strings/Index.js))
 
 | Technique | Programs |
 |---|---|
-| **Two pointers** | Valid palindrome, reverse vowels |
-| **Hash maps / frequency counters** | Anagram, first non-repeating character, group anagrams |
+| **Two pointers** | Valid palindrome, reverse vowels, reverse a string |
+| **Hash maps / frequency counters** | Anagram, first non-repeating character, group anagrams, character frequency, find duplicate characters |
+| **Set (seen before?)** | Remove duplicate characters |
 | **Sliding window** | Longest substring without repeating characters |
 | **Stack** | Valid parentheses |
-| **String manipulation** | Reverse each word, rotate string, string compression |
-| **Parsing & cleaning** | Remove junk, truncate, count words, replace vowels |
+| **String manipulation** | Reverse each word, reverse word order, rotate string, string compression |
+| **Parsing & cleaning** | Remove junk, truncate, count words, replace vowels, count character types |
 
 ---
 
