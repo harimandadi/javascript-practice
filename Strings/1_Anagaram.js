@@ -1,40 +1,26 @@
-/**
- * Checks if two strings are valid anagrams using a Plain Object.
- * Example: s = "anagram", t = "nagaram" -> true
- * 
- * @param {string} s - First string
- * @param {string} t - Second string
- * @returns {boolean}
- */
+*/
+
 function isAnagram(s, t) {
-  // 1. Edge case: if lengths don't match, they can't be anagrams
+  // STEP 1: different lengths can never be anagrams
   if (s.length !== t.length) return false;
 
+  // counts["a"] = how many "a"s from s are still unused
   const counts = {};
 
-  // 2. Step 1: Build the frequency map using string 's'
-  for (let i = 0; i < s.length; i++) {
-    const char = s[i];
-    counts[char] = (counts[char] || 0) + 1;
+  // STEP 2: count UP every letter of s
+  for (const ch of s) {
+    counts[ch] = (counts[ch] || 0) + 1;     // seen before → old count + 1; new letter → (undefined || 0) + 1 = 1
   }
 
-  // 3. Step 2: Loop through string 't' to decrement counts
-  for (let i = 0; i < t.length; i++) {
-    const char = t[i];
-    
-    // If character is missing or count is already 0, it's not an anagram
-    if (!counts[char]) {
-      return false; // Early exit
-    }
-    
-    // Decrement the count for the matched character
-    counts[char]--;
+  // STEP 3: count DOWN with every letter of t
+  for (const ch of t) {
+    if (!counts[ch]) return false;          // undefined (never in s) OR 0 (already used up) → not an anagram
+    counts[ch]--;                           // use one copy of this letter
   }
 
-  // If the loop completes successfully, they are valid anagrams
+  // STEP 4: same length + nothing missing or used up → every count ended at exactly 0
   return true;
 }
 
-// --- Test Examples ---
-console.log(isAnagram("anagram", "nagaram")); // Output: true
-console.log(isAnagram("rat", "car"));         // Output: false
+/*
+ * 

@@ -48,26 +48,22 @@ function maxAreaBrute(height) {
 
 // ── OPTIMAL: two pointers, O(n) ───────────────────────────────────────────────
 function maxArea(height) {
-  let left = 0;                                      // STEP 1: one pointer at each END
-  let right = height.length - 1;                     //         → the widest container first
-  let best = 0;                                      // most water seen so far
+  let left = 0;                          // pointer at the start
+  let right = height.length - 1;         // pointer at the end
+  let max = 0;                           // best water so far
 
-  while (left < right) {                             // until the pointers meet
-    const width = right - left;                      // distance between the two lines
-    const level = Math.min(height[left], height[right]); // water rises only to the SHORTER line
-    best = Math.max(best, width * level);            // keep the best container
+  while (left < right) {
+    const width = right - left;                                  // distance between the lines
+    const h = Math.min(height[left], height[right]);             // shorter line limits the water
+    max = Math.max(max, width * h);                              // remember the best
 
-    // STEP 2: move the SHORTER line inward (the taller one can't help, see WHY above)
-    if (height[left] < height[right]) {
-      left++;                                        // left is shorter → try the next one to the right
-    } else {
-      right--;                                       // right is shorter (or equal) → move it left
-    }
+    if (height[left] < height[right]) left++;                    // move the SHORTER line
+    else right--;
   }
-
-  return best;
+  return max;
 }
 
+console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));   // 49
 /*
  * ═════════════════════════════════════════════════════════════════════════════
  * EVERY ITERATION for height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
